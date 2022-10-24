@@ -11,8 +11,9 @@ class SELCONDataLoader(AdaptiveDSSDataLoader):
         """
         assert "model" in dss_args.keys(), "'model' is a compulsory argument. Include it as a key in dss_args"
         assert "loss" in dss_args.keys(), "'loss' is a compulsory argument. Include it as a key in dss_args"
-        if dss_args.loss.reduction != "none":
-            raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
+        #TODO::
+        #if dss_args.loss.reduction != "none":
+        #    raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
         assert "device" in dss_args.keys(), "'device' is a compulsory argument. Include it as a key in dss_args"
         assert "num_classes" in dss_args.keys(), "'num_classes' is a compulsory argument for SELCON. Include it as a key in dss_args"
         assert "delta" in dss_args.keys(), "'delta' is a compulsory argument for SELCON. Include it as a key in dss_args"

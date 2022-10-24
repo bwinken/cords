@@ -28,8 +28,9 @@ class GLISTERDataLoader(AdaptiveDSSDataLoader):
         # Arguments assertion check
         assert "model" in dss_args.keys(), "'model' is a compulsory argument. Include it as a key in dss_args"
         assert "loss" in dss_args.keys(), "'loss' is a compulsory argument. Include it as a key in dss_args"
-        if dss_args.loss.reduction != "none":
-            raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
+        #TODO::
+        #if dss_args.loss.reduction != "none":
+        #    raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
         assert "eta" in dss_args.keys(), "'eta' is a compulsory argument. Include it as a key in dss_args"
         assert "num_classes" in dss_args.keys(), "'num_classes' is a compulsory argument for GLISTER. Include it as a key in dss_args"
         assert "linear_layer" in dss_args.keys(), "'linear_layer' is a compulsory argument for GLISTER. Include it as a key in dss_args"

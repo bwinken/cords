@@ -26,8 +26,9 @@ class CRAIGDataLoader(AdaptiveDSSDataLoader):
         # Arguments assertion check
         assert "model" in dss_args.keys(), "'model' is a compulsory argument. Include it as a key in dss_args"
         assert "loss" in dss_args.keys(), "'loss' is a compulsory argument. Include it as a key in dss_args"
-        if dss_args.loss.reduction != "none":
-            raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
+        #TODO::
+        #if dss_args.loss.reduction != "none":
+        #    raise ValueError("Please set 'reduction' of loss function to 'none' for adaptive subset selection strategies")
         assert "num_classes" in dss_args.keys(), "'num_classes' is a compulsory argument for CRAIG. Include it as a key in dss_args"
         assert "linear_layer" in dss_args.keys(), "'linear_layer' is a compulsory argument for CRAIG. Include it as a key in dss_args"
         assert "selection_type" in dss_args.keys(), "'selection_type' is a compulsory argument for CRAIG. Include it as a key in dss_args"
