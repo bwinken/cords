@@ -3,6 +3,7 @@ import apricot
 import numpy as np
 import time
 import torch
+from tqdm import tqdm
 from scipy.sparse import csr_matrix
 from torch.utils.data.sampler import SubsetRandomSampler
 from .dataselectionstrategy import DataSelectionStrategy
@@ -123,7 +124,7 @@ class CRAIGStrategy(DataSelectionStrategy):
         g_is = []
 
         if self.if_convex:
-            for batch_idx, (inputs, targets) in enumerate(subset_loader):
+            for batch_idx, (inputs, targets) in tqdm(enumerate(subset_loader)):
                 inputs, targets = inputs, targets
                 if self.selection_type == 'PerBatch':
                     self.N += 1
@@ -133,7 +134,7 @@ class CRAIGStrategy(DataSelectionStrategy):
                     g_is.append(inputs.view(inputs.size()[0], -1))
         else:
             embDim = self.model.get_embedding_dim()
-            for batch_idx, (inputs, targets) in enumerate(subset_loader):
+            for batch_idx, (inputs, targets) in tqdm(enumerate(subset_loader)):
                 inputs, targets = inputs.to(self.device), targets.to(self.device, non_blocking=True)
                 if self.selection_type == 'PerBatch':
                     self.N += 1

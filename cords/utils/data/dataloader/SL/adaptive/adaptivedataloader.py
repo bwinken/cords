@@ -59,19 +59,28 @@ class AdaptiveDSSDataLoader(DSSDataLoader):
             self.logger.debug(
                 "Skipping epoch {0:d} due to warm-start option. ".format(self.cur_epoch, self.warmup_epochs))
             loader = DataLoader([])
+            self.cur_epoch += 1 #Kane modified
+            
             
         elif self.cur_epoch <= self.warmup_epochs:
             self.logger.debug('Epoch: {0:d}, reading dataloader... '.format(self.cur_epoch))
             loader = self.wtdataloader
+            self.cur_epoch += 1 #Kane modified
             self.logger.debug('Epoch: {0:d}, finished reading dataloader. '.format(self.cur_epoch))
         else:
             self.logger.debug('Epoch: {0:d}, reading dataloader... '.format(self.cur_epoch))
             if ((self.cur_epoch - 1) % self.select_every == 0) and (self.cur_epoch > 1):
+                self.cur_epoch += 1 #Kane modified
                 self.resample()
-            loader = self.subset_loader
-            self.logger.debug('Epoch: {0:d}, finished reading dataloader. '.format(self.cur_epoch))
-            
-        self.cur_epoch += 1
+                loader = self.subset_loader
+                self.logger.debug('Epoch: {0:d}, finished reading dataloader. '.format(self.cur_epoch))
+            else:
+                loader = self.subset_loader
+                self.logger.debug('Epoch: {0:d}, finished reading dataloader. '.format(self.cur_epoch))
+                self.cur_epoch += 1 #Kane modified
+
+        #TODO:: Kane modified
+        #self.cur_epoch += 1
         return loader.__iter__()
 
     def __len__(self) -> int:

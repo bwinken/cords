@@ -1,5 +1,5 @@
 import torch
-
+from tqdm import tqdm
 
 class DataSelectionStrategy(object):
     """
@@ -113,8 +113,8 @@ class DataSelectionStrategy(object):
             trainloader = self.trainloader
             if valid:
                 valloader = self.valloader
-            
-        for batch_idx, (inputs, targets) in enumerate(trainloader):
+        print('ITERATE over TRAIN')
+        for batch_idx, (inputs, targets) in tqdm(enumerate(trainloader)):
             inputs, targets = inputs.to(self.device), targets.to(self.device, non_blocking=True)
             if batch_idx == 0:
                 out, l1 = self.model(inputs, last=True, freeze=True)
@@ -151,7 +151,8 @@ class DataSelectionStrategy(object):
             self.grads_per_elem = l0_grads
 
         if valid:
-            for batch_idx, (inputs, targets) in enumerate(valloader):
+            print('ITERATE over VALID')
+            for batch_idx, (inputs, targets) in tqdm(enumerate(valloader)):
                 inputs, targets = inputs.to(self.device), targets.to(self.device, non_blocking=True)
                 if batch_idx == 0:
                     out, l1 = self.model(inputs, last=True, freeze=True)

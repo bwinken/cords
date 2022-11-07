@@ -73,4 +73,8 @@ class DSSDataLoader:
         self.subset_loader = DataLoader(WeightedSubset(self.dataset, self.subset_indices, self.subset_weights), 
                                         *self.loader_args, **self.loader_kwargs)
         self.batch_wise_indices = list(self.subset_loader.batch_sampler)
+    
+    def get_dss(self):
+        return self.subset_indices, self.subset_weights
+
 
